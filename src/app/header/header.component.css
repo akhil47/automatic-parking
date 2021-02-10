@@ -1,0 +1,13 @@
+#main-container{
+    background-color: #28B463;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#header-text{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0px;
+    color: white;
+} 
