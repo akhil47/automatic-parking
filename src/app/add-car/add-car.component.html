@@ -1,6 +1,8 @@
 <div id="main-container" (click)="$event.stopPropagation()">
     <p id="header-text">Park a new car</p>
     <div id="seperator"></div>
+    <p *ngIf="showErrorMsg" class="error-msg" [innerHTML]="errorMsg"></p>
+    <p *ngIf="availableSlots.length == 0" class="error-msg">No slots available, please try after some time.</p>
     <form (ngSubmit)="parkCar(f)" #f="ngForm">
         <input 
             class="ip-field"
@@ -16,6 +18,7 @@
             name="color"
             placeholder="Color"
             ngModel
+            required
         >
         <select
             class="ip-field"
@@ -23,10 +26,11 @@
             class="ip-field"
             [ngModel]="selectedSlot"
             style="width: 100%; cursor: pointer;"
+            required
         >
             <option *ngFor="let slot of availableSlots" [value]="slot">{{slot}}</option>
             <option value="default" selected disabled hidden>Choose a slot</option>
         </select>
-        <button type="submit">Park car</button>
+        <button type="submit" [disabled]="!f.valid || availableSlots.length == 0">Park car</button>
     </form>
 </div>

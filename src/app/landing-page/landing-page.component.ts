@@ -10,6 +10,8 @@ import { ParkingService } from '../parking.service';
 })
 export class LandingPageComponent implements OnInit {
 
+  showErrorMsg = false
+  errorMsg = ''
   constructor(private router: Router, private parkingService: ParkingService) { }
 
   ngOnInit(): void {
@@ -19,8 +21,17 @@ export class LandingPageComponent implements OnInit {
     let totalSlots = form.value.noOfSlots
     let occupiedSlots = form.value.noOfCars
 
-    this.parkingService.createParkingLot(totalSlots, occupiedSlots)
-
-    this.router.navigate(['/parking-lot'])
+    if(totalSlots < occupiedSlots){
+      this.showErrorMsg = true
+      this.errorMsg = 'Error: Available slots are less than parked cars'
+    }
+    else if(totalSlots < 0 || occupiedSlots < 0){
+      this.showErrorMsg = true
+      this.errorMsg = 'Error: Invalid input, please try again'
+    }
+    else{
+      this.parkingService.createParkingLot(totalSlots, occupiedSlots)
+      this.router.navigate(['/parking-lot'])
+    }
   }
 }

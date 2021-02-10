@@ -28,9 +28,7 @@
         <form (ngSubmit)="searchCars(f)" #f="ngForm">
             <input class="ip-field" type="text" name="regNo" placeholder="Vehicle Reg. No" ngModel>
             <select name="color" id="color-select" class="ip-field" [ngModel]="selectedColor">
-                <option value="red">Red</option>
-                <option value="red">Green</option>
-                <option value="red">Blue</option>
+                <option *ngFor="let color of listCarColorsInParking" [value]="color">{{color}}</option>
                 <option value="default" selected disabled hidden>Choose color</option>
             </select>
             <button id="search-btn" type="submit">Search</button> 
@@ -47,7 +45,7 @@
                 <th>Date & Time</th>
                 <th></th>
             </tr>
-            <tr *ngFor="let car of carsParked; let i = index;">
+            <tr *ngFor="let car of filteredCarsParked; let i = index;">
                 <td class="car-details-cell">{{i + 1}}</td>
                 <td class="car-details-cell">{{car.vehicleNo}}</td>
                 <td class="car-details-cell">{{car.color}}</td>

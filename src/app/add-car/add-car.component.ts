@@ -11,11 +11,16 @@ export class AddCarComponent implements OnInit {
 
   selectedSlot = 'default'
   availableSlots = []
+
+  showErrorMsg = true
+  errorMsg = 'Error: Please select a slot'
   @Output() newCarAdded = new EventEmitter<any>();
 
   constructor(private parkingService: ParkingService) { }
 
   ngOnInit(): void {
+    this.showErrorMsg = false
+    this.errorMsg = ''
     this.availableSlots = this.parkingService.getListOfFreeSlots()
   }
 
@@ -24,8 +29,16 @@ export class AddCarComponent implements OnInit {
     let vehicleNo = form.value.vehicleNo
     let color = form.value.color
     let slotNo = form.value.slotNo
-    this.parkingService.addCar(vehicleNo, color, slotNo)
-    this.newCarAdded.emit(true) 
+    if(slotNo == 'default'){
+      this.showErrorMsg = true
+      this.errorMsg = 'Error: Please select a slot'
+    }
+    else{
+      this.showErrorMsg = false
+      this.errorMsg = ''
+      this.parkingService.addCar(vehicleNo, color, slotNo)
+      this.newCarAdded.emit(true)
+    }
   } 
 
 }

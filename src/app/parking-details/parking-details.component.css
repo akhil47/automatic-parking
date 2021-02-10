@@ -46,6 +46,10 @@ button{
     background-color: #E74C3C;
     color: white;
 }
+#park-btn:disabled{
+    cursor: not-allowed;
+    background-color: rgba(231, 76, 60, 0.5);
+}
 #seperator{
     height: 1px;
     margin-top: 8px;

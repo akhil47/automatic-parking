@@ -3,6 +3,7 @@
         <form (ngSubmit)="createNewParkingLot(f)" #f="ngForm">
             <p id="header-text">Create a new parking lot</p>
             <div id="seperator"></div>
+            <p *ngIf="showErrorMsg" id="error-msg" [innerHTML]="errorMsg"></p>
             <label>No. of parking slots</label>
             <input type="number" name="noOfSlots" ngModel required>
             <label>No. of cars parked</label>

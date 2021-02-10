@@ -8,7 +8,7 @@
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 8px;
-    background-color: #82E0AA;
+    background-color: #F7F9F9;
     border-radius: 4px;
 }
 #header-text{
@@ -18,7 +18,7 @@
 #seperator{
     height: 1px;
     margin: 8px 0px;
-    background-color: grey;
+    background-color: black;
 }
 input{
     display: block;
@@ -50,4 +50,16 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+#error-msg{
+    background-color: rgba(241, 148, 138, 0.3);
+    border-radius: 4px;
+    text-align: center;
+    color: red;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px;
 }

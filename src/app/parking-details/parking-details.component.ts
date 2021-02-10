@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ParkingService } from '../parking.service';
@@ -10,10 +10,14 @@ import { ParkingService } from '../parking.service';
 })
 export class ParkingDetailsComponent implements OnInit {
 
+  @ViewChild('f') filtersForm: NgForm
+
   totalSlots = 0
   availableSlots = 0
   carsParked = []
+  filteredCarsParked = []
   selectedColor = 'default'
+  listCarColorsInParking = []
 
   parkingLotSubscription: Subscription
 
@@ -24,24 +28,48 @@ export class ParkingDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.carsParked = this.parkingService.getParkedCars()
+    this.filteredCarsParked = [...this.carsParked]
     this.totalSlots = this.parkingService.getTotalSlots()
     this.availableSlots = this.parkingService.getAvailableSlots()
+    this.extractCarColors()
 
     this.parkingLotSubscription = this.parkingService.currentParkingLotStatus.subscribe(
       status => {
         this.availableSlots = status.availableSlots,
         this.carsParked = status.parkedCarsList
+        this.filteredCarsParked = [...this.carsParked]
+        this.extractCarColors()
       }
     )
   }
+  extractCarColors(){
+    this.listCarColorsInParking = []
+    let colors = {}
+    for(let car of this.carsParked){
+      colors[car.color] = 1
+    }
+    this.listCarColorsInParking = Object.keys(colors)
+  }
   searchCars(f: NgForm){
-    console.log(f.value)
+    let vehicleNo = f.value.regNo
+    let color = f.value.color
+    this.filteredCarsParked = this.carsParked.filter(
+      (car, index) => {
+        if(color != 'default'){
+          return (car.color == color && car.vehicleNo.match(vehicleNo))
+        }
+        else{
+          return car.vehicleNo.match(vehicleNo)
+        }
+      }
+    )
   }
   resetFilters(f: NgForm){
     f.resetForm({
       regNo: '',
       color: 'default'
     })
+    this.filteredCarsParked = [...this.carsParked]
   }
   showParkCar(){
     this.showParkCarPopup = true
@@ -51,6 +79,7 @@ export class ParkingDetailsComponent implements OnInit {
   }
   removeCar(index){
     this.parkingService.removeCar(index)
+    this.resetFilters(this.filtersForm)
   }
   closePopup(){
     this.showParkCarPopup = false
