@@ -38,7 +38,7 @@ export class ParkingService {
       this.parkedCarsList.push({...defaultParkedCars[i % 5], ...slot})
     }
     this.parkingLotCreated = true
-    console.log(this.totalSlots, this.occupiedSlots, this.parkedCarsList, this.freeSlots)
+    // console.log(this.totalSlots, this.occupiedSlots, this.parkedCarsList, this.freeSlots)
   }
   isParkingLotCreated(){
     return this.parkingLotCreated
@@ -66,7 +66,7 @@ export class ParkingService {
       vehicleNo: vehicleNo,
       color: color,
       inTime: new Date(),
-      slotNo: slotNo
+      slotNo: parseInt(slotNo)
     }
     let i = this.freeSlots.indexOf(slotNo)
     this.freeSlots.splice(i, 1)
@@ -92,6 +92,6 @@ export class ParkingService {
       availableSlots: this.freeSlots.length,
       parkedCarsList: [...this.parkedCarsList]
     })
-    console.log(this.freeSlots, this.parkingHistory)
+    // console.log(this.freeSlots, this.parkingHistory)
   }
 }

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ParkingService } from '../parking.service';
 
@@ -8,10 +8,9 @@ import { ParkingService } from '../parking.service';
   templateUrl: './parking-details.component.html',
   styleUrls: ['./parking-details.component.css']
 })
-export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ParkingDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('f') filtersForm: NgForm
-
   private vehicleNo;
   @ViewChild('regNo') set initVehicleNo(regNo){
     if(regNo){
@@ -41,6 +40,8 @@ export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit
   showParkCarPopup = false
   showParkingHistory = false
 
+  sortState = null
+
   constructor(private parkingService: ParkingService) { }
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit
         this.availableSlots = status.availableSlots,
         this.carsParked = status.parkedCarsList
         this.filteredCarsParked = [...this.carsParked]
+        this.sortState = null
         this.extractCarColors()
       }
     )
@@ -62,9 +64,6 @@ export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit
   ngOnDestroy(){
     if(this.parkingLotSubscription) this.parkingLotSubscription.unsubscribe()
     if(this.vehicleNoSubscription) this.vehicleNoSubscription.unsubscribe()
-  }
-  ngAfterViewInit(){
-    
   }
   extractCarColors(){
     this.listCarColorsInParking = []
@@ -87,6 +86,146 @@ export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit
         }
       }
     )
+  }
+  sortCars(type: string){
+    if(type === 'vehicleNo'){
+      if(this.sortState == null){
+        this.sortState = {
+          header: 'vehicleNo',
+          type: 1,
+          originalState: [...this.filteredCarsParked]
+        }
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.vehicleNo < b.vehicleNo) return -1;
+          else if(a.vehicleNo > b.vehicleNo) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header !== 'vehicleNo'){
+        this.sortState.header = 'vehicleNo'
+        this.sortState.type = 1
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.vehicleNo < b.vehicleNo) return -1;
+          else if(a.vehicleNo > b.vehicleNo) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header === 'vehicleNo' && this.sortState.type == 1){
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.vehicleNo < b.vehicleNo) return 1;
+          else if(a.vehicleNo > b.vehicleNo) return -1;
+          return 0;
+        })
+        this.sortState['header'] = 'vehicleNo'
+        this.sortState['type'] = -1
+      }
+      else if(this.sortState.header === 'vehicleNo' && this.sortState.type == -1){
+        this.filteredCarsParked = [...this.sortState.originalState]
+        this.sortState = null
+      }
+    }
+    else if(type === 'color'){
+      if(this.sortState == null){
+        this.sortState = {
+          header: 'color',
+          type: 1,
+          originalState: [...this.filteredCarsParked]
+        }
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.color < b.color) return -1;
+          else if(a.color > b.color) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header !== 'color'){
+        this.sortState.header = 'color'
+        this.sortState.type = 1
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.color < b.color) return -1;
+          else if(a.color > b.color) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header === 'color' && this.sortState.type == 1){
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.color < b.color) return 1;
+          else if(a.color > b.color) return -1;
+          return 0;
+        })
+        this.sortState['header'] = 'color'
+        this.sortState['type'] = -1
+      }
+      else if(this.sortState.header === 'color' && this.sortState.type == -1){
+        this.filteredCarsParked = [...this.sortState.originalState]
+        this.sortState = null
+      }
+    }
+    else if(type === 'slotNo'){
+      if(this.sortState == null){
+        this.sortState = {
+          header: 'slotNo',
+          type: 1,
+          originalState: [...this.filteredCarsParked]
+        }
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.slotNo < b.slotNo) return -1;
+          else if(a.slotNo > b.slotNo) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header !== 'slotNo'){
+        this.sortState.header = 'slotNo'
+        this.sortState.type = 1
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.slotNo < b.slotNo) return -1;
+          else if(a.slotNo > b.slotNo) return 1;
+          return 0;
+        })
+      }
+      else if(this.sortState.header === 'slotNo' && this.sortState.type == 1){
+        this.filteredCarsParked.sort((a, b) => {
+          if(a.slotNo < b.slotNo) return 1;
+          else if(a.slotNo > b.slotNo) return -1;
+          return 0;
+        })
+        this.sortState['header'] = 'slotNo'
+        this.sortState['type'] = -1
+      }
+      else if(this.sortState.header === 'slotNo' && this.sortState.type == -1){
+        this.filteredCarsParked = [...this.sortState.originalState]
+        this.sortState = null
+      }
+    }
+    else if(type === 'date'){
+      if(this.sortState == null){
+        this.sortState = {
+          header: 'date',
+          type: 1,
+          originalState: [...this.filteredCarsParked]
+        }
+        this.filteredCarsParked.sort((a, b) => {
+          return a.inTime - b.inTime;
+        })
+      }
+      else if(this.sortState.header !== 'date'){
+        this.sortState.header = 'date'
+        this.sortState.type = 1
+        this.filteredCarsParked.sort((a, b) => {
+          return a.inTime - b.inTime;
+        })
+      }
+      else if(this.sortState.header === 'date' && this.sortState.type == 1){
+        this.filteredCarsParked.sort((a, b) => {
+          return b.inTime - a.inTime;
+        })
+        this.sortState['header'] = 'date'
+        this.sortState['type'] = -1
+      }
+      else if(this.sortState.header === 'date' && this.sortState.type == -1){
+        this.filteredCarsParked = [...this.sortState.originalState]
+        this.sortState = null
+      }
+    }
   }
   resetFilters(f: NgForm){
     f.resetForm({

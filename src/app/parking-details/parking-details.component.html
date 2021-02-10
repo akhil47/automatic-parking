@@ -38,11 +38,11 @@
     <div id="parking-details-container">
         <table style="width: 100%;">
             <tr>
-                <th>#</th>
-                <th>Vehicle No</th>
-                <th>Color</th>
-                <th>Slot No</th>
-                <th>Date & Time</th>
+                <th (click)="sortCars('index')">#</th>
+                <th (click)="sortCars('vehicleNo')">Vehicle No</th>
+                <th (click)="sortCars('color')">Color</th>
+                <th (click)="sortCars('slotNo')">Slot No</th>
+                <th (click)="sortCars('date')">Date & Time</th>
                 <th></th>
             </tr>
             <tr *ngFor="let car of filteredCarsParked; let i = index;">

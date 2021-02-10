@@ -20,7 +20,6 @@ export class VehicleNoValidatorDirective implements Validator{
       }
       if(vehicleNo.length == 0){
         if(errors == null) errors = {}
-        console.log("triggered")
         errors['invalidVehicleNo'] = 'Please provide valid Reg No. eg: KA12EK1234'
       }
       if(this.checkIfVehicleNoAlreadyExistsInParking(vehicleNo)){

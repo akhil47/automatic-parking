@@ -23,7 +23,6 @@ export class AddCarComponent implements OnInit {
   }
 
   parkCar(form: NgForm){
-    console.log(form)
     let vehicleNo = form.value.vehicleNo
     let color = form.value.color
     let slotNo = form.value.slotNo
