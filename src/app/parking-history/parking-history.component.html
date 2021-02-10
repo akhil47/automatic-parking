@@ -1,0 +1,40 @@
+<div id="main-container" (click)="$event.stopPropagation()">
+    <p id="header-text">Parking Logs</p>
+    <div id="seperator"></div>
+    <div id="history-details-container">
+        <div class="car-log" *ngFor="let log of parkingHistory">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="cell-1">Vehicle No</td>
+                    <td class="cell-2">:</td>
+                    <td class="cell-3">{{log.vehicleNo}}</td>
+                </tr>
+                <tr>
+                    <td class="cell-1">Slot No</td>
+                    <td class="cell-2">:</td>
+                    <td class="cell-3">{{log.slotNo}}</td>
+                </tr>
+                <tr>
+                    <td class="cell-1">In Time</td>
+                    <td class="cell-2">:</td>
+                    <td class="cell-3">{{log.inTime | date: 'dd MMM yyyy, hh:mm a'}}</td>
+                </tr>
+                <tr>
+                    <td class="cell-1">Out Time</td>
+                    <td class="cell-2">:</td>
+                    <td class="cell-3">{{log.outTime | date: 'dd MMM yyyy, hh:mm a'}}</td>
+                </tr>
+                <tr>
+                    <td class="cell-1">Fee</td>
+                    <td class="cell-2">:</td>
+                    <td class="cell-3">{{log.fee}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="seperator"></div>
+    <div id="fee-container">
+        <p class="fee-text">Total Fee collected</p>
+        <p class="fee-text">Rs. {{totalFeeCollected}}</p>
+    </div>
+</div>

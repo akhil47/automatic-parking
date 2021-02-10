@@ -22,6 +22,7 @@ export class ParkingService {
   createParkingLot(totalSlots: number, occupiedSlots: number){
     this.parkedCarsList = []
     this.freeSlots = []
+    this.parkingHistory = []
 
     this.totalSlots = totalSlots
     this.occupiedSlots = occupiedSlots
@@ -48,6 +49,9 @@ export class ParkingService {
   }
   getParkedCars(){
     return [...this.parkedCarsList]
+  }
+  getParkingHistory(){
+    return [...this.parkingHistory]
   }
   addCar(vehicleNo: string, color: string, slotNo){
     let car = {

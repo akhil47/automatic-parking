@@ -18,6 +18,7 @@ export class ParkingDetailsComponent implements OnInit {
   parkingLotSubscription: Subscription
 
   showParkCarPopup = false
+  showParkingHistory = false
 
   constructor(private parkingService: ParkingService) { }
 
@@ -45,11 +46,14 @@ export class ParkingDetailsComponent implements OnInit {
   showParkCar(){
     this.showParkCarPopup = true
   }
+  showParkingLogs(){
+    this.showParkingHistory = true
+  }
   removeCar(index){
     this.parkingService.removeCar(index)
   }
   closePopup(){
     this.showParkCarPopup = false
-    console.log('close')
+    this.showParkingHistory = false
   }
 }

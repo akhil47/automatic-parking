@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddCarComponent } from './add-car/add-car.component';
+import { ParkingHistoryComponent } from './parking-history/parking-history.component';
 
 const appRoutes = [
   {path: '', redirectTo: 'create-parking-lot', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const appRoutes = [
     LandingPageComponent,
     ParkingDetailsComponent,
     HeaderComponent,
-    AddCarComponent
+    AddCarComponent,
+    ParkingHistoryComponent
   ],
   imports: [
     BrowserModule,

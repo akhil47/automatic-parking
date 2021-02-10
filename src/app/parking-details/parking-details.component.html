@@ -1,6 +1,9 @@
 <div *ngIf="showParkCarPopup" (click)="closePopup()" class="popup">
     <app-add-car (newCarAdded)="closePopup()"></app-add-car>
 </div>
+<div *ngIf="showParkingHistory" class="popup" (click)="closePopup()">
+    <app-parking-history></app-parking-history>
+</div>
 <div id="main-container">
     <div id="stats-container">
         <table style="width: 100%;">
@@ -17,7 +20,7 @@
         </table>
     </div>
     <div id="btns-container">
-        <button id="query-btn">Query Data</button> 
+        <button (click)="showParkingLogs()" id="query-btn">Query Data</button> 
         <button (click)="showParkCar()" id="park-btn">Park a car</button>
     </div>
     <div id="seperator"></div>
