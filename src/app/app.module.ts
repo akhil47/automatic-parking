@@ -10,11 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddCarComponent } from './add-car/add-car.component';
 import { ParkingHistoryComponent } from './parking-history/parking-history.component';
+import { GuardService } from './guard.service';
 
 const appRoutes = [
   {path: '', redirectTo: 'create-parking-lot', pathMatch: 'full'},
   {path: 'create-parking-lot', component: LandingPageComponent},
-  {path: 'parking-lot', component: ParkingDetailsComponent},
+  {path: 'parking-lot', canActivate: [GuardService], component: ParkingDetailsComponent},
   {path: '**', component: PageNotFoundComponent}
 ]
 @NgModule({

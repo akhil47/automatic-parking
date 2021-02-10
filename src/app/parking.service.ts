@@ -7,6 +7,8 @@ import { defaultParkedCars, ParkingLot } from './default-parked-cars'
 })
 export class ParkingService {
 
+  private parkingLotCreated = false
+
   private totalSlots = 0
   private occupiedSlots = 0
 
@@ -35,8 +37,11 @@ export class ParkingService {
       let slot = {slotNo: this.freeSlots.shift()}
       this.parkedCarsList.push({...defaultParkedCars[i % 5], ...slot})
     }
-
+    this.parkingLotCreated = true
     console.log(this.totalSlots, this.occupiedSlots, this.parkedCarsList, this.freeSlots)
+  }
+  isParkingLotCreated(){
+    return this.parkingLotCreated
   }
   getTotalSlots(){
     return this.totalSlots
