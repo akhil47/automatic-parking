@@ -81,24 +81,52 @@ button{
 /* Parking lot details related CSS */
 #parking-details-container{
     margin-top: 8px;
+    overflow-x: auto;
 }
+tbody {
+    display: block;
+    height: 320px;
+    overflow: auto;
+}
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+/* thead {
+    width: calc( 100% - 1em )
+} */
 th{
     background-color: black;
     color: white;
     font-size: 14px;
     font-weight: normal;
     padding: 8px;
+    width: 180px;
     cursor: pointer;
 }
 .car-details-cell{
     text-align: center;
+    width: 180px;
     padding: 8px;
 }
 #remove-btn{
     background-color: #F1C40F;
     color: black;
 }
-
+.double-caret-container img{
+    height: 6px;
+    width: 6px;
+    display: block;
+    margin-left: 8px;
+}
+.single-caret-container img{
+    height: 6px;
+    width: 6px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 8px;
+}
 /* Popup related CSS */
 .popup{
     position: absolute;

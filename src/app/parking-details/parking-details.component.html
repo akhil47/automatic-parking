@@ -37,22 +37,90 @@
     </div>
     <div id="parking-details-container">
         <table style="width: 100%;">
-            <tr>
-                <th (click)="sortCars('index')">#</th>
-                <th (click)="sortCars('vehicleNo')">Vehicle No</th>
-                <th (click)="sortCars('color')">Color</th>
-                <th (click)="sortCars('slotNo')">Slot No</th>
-                <th (click)="sortCars('date')">Date & Time</th>
-                <th></th>
-            </tr>
-            <tr *ngFor="let car of filteredCarsParked; let i = index;">
-                <td class="car-details-cell">{{i + 1}}</td>
-                <td class="car-details-cell">{{car.vehicleNo}}</td>
-                <td class="car-details-cell">{{car.color}}</td>
-                <td class="car-details-cell">{{car.slotNo}}</td>
-                <td class="car-details-cell">{{car.inTime | date: 'dd MMM yyyy, hh:mm a'}}</td>
-                <td class="car-details-cell"><button id="remove-btn" (click)="removeCar(i)">Remove</button></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th style="cursor: default;">#</th>
+                    <th (click)="sortCars('vehicleNo')">
+                        <div *ngIf="sortState == null || (sortState && sortState.header !== 'vehicleNo')" class="double-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Vehicle No</p>
+                            <div style="display: inline-block;">
+                                <img style="margin-top: 3px;" src="assets/svg/caret-arrow-up.svg">
+                                <img src="assets/svg/caret-down.svg">
+                            </div>
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'vehicleNo') && sortState.type == 1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Vehicle No</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-arrow-up.svg">
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'vehicleNo') && sortState.type == -1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Vehicle No</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-down.svg">
+                        </div>
+                    </th>
+                    <th (click)="sortCars('color')">
+                        <div *ngIf="sortState == null || (sortState && sortState.header !== 'color')" class="double-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Color</p>
+                            <div style="display: inline-block;">
+                                <img style="margin-top: 3px;" src="assets/svg/caret-arrow-up.svg">
+                                <img src="assets/svg/caret-down.svg">
+                            </div>
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'color') && sortState.type == 1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Color</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-arrow-up.svg">
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'color') && sortState.type == -1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Color</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-down.svg">
+                        </div>
+                    </th>
+                    <th (click)="sortCars('slotNo')">
+                        <div *ngIf="sortState == null || (sortState && sortState.header !== 'slotNo')" class="double-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Slot No</p>
+                            <div style="display: inline-block;">
+                                <img style="margin-top: 3px;" src="assets/svg/caret-arrow-up.svg">
+                                <img src="assets/svg/caret-down.svg">
+                            </div>
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'slotNo') && sortState.type == 1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Slot No</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-arrow-up.svg">
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'slotNo') && sortState.type == -1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Slot No</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-down.svg">
+                        </div>
+                    </th>
+                    <th (click)="sortCars('date')">
+                        <div *ngIf="sortState == null || (sortState && sortState.header !== 'date')" class="double-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Date & Time</p>
+                            <div style="display: inline-block;">
+                                <img style="margin-top: 3px;" src="assets/svg/caret-arrow-up.svg">
+                                <img src="assets/svg/caret-down.svg">
+                            </div>
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'date') && sortState.type == 1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Date & Time</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-arrow-up.svg">
+                        </div>
+                        <div *ngIf="sortState && (sortState.header === 'date') && sortState.type == -1" class="single-caret-container">
+                            <p style="display: inline-block; margin: 0px; vertical-align: top;">Date & Time</p>
+                            <img style="margin-top: 5.5px;" src="assets/svg/caret-down.svg">
+                        </div>
+                    </th>
+                    <th style="cursor: default;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let car of filteredCarsParked; let i = index;">
+                    <td class="car-details-cell">{{i + 1}}</td>
+                    <td class="car-details-cell">{{car.vehicleNo}}</td>
+                    <td class="car-details-cell">{{car.color}}</td>
+                    <td class="car-details-cell">{{car.slotNo}}</td>
+                    <td class="car-details-cell">{{car.inTime | date: 'dd MMM yyyy, hh:mm a'}}</td>
+                    <td class="car-details-cell"><button id="remove-btn" (click)="removeCar(i)">Remove</button></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
