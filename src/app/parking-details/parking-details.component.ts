@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ParkingService } from '../parking.service';
@@ -10,6 +10,9 @@ import { ParkingService } from '../parking.service';
 })
 export class ParkingDetailsComponent implements OnInit, OnDestroy {
 
+  @HostListener('document:keydown.escape', ['$event']) onEscape(event: KeyboardEvent) {
+    this.closePopup()
+  }
   @ViewChild('f') filtersForm: NgForm
   private vehicleNo;
   @ViewChild('regNo') set initVehicleNo(regNo){
