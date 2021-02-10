@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ParkingService } from '../parking.service';
 
@@ -10,35 +10,27 @@ import { ParkingService } from '../parking.service';
 export class AddCarComponent implements OnInit {
 
   selectedSlot = 'default'
+  selectedColor = 'default'
+  availableColors = ['Black', 'White', 'Grey', 'Green', 'Blue', 'Red', 'Yellow', 'Orange', 'Pink']
   availableSlots = []
 
-  showErrorMsg = true
-  errorMsg = 'Error: Please select a slot'
   @Output() newCarAdded = new EventEmitter<any>();
 
   constructor(private parkingService: ParkingService) { }
 
   ngOnInit(): void {
-    this.showErrorMsg = false
-    this.errorMsg = ''
     this.availableSlots = this.parkingService.getListOfFreeSlots()
   }
 
   parkCar(form: NgForm){
-    console.log(form.value)
+    console.log(form)
     let vehicleNo = form.value.vehicleNo
     let color = form.value.color
     let slotNo = form.value.slotNo
-    if(slotNo == 'default'){
-      this.showErrorMsg = true
-      this.errorMsg = 'Error: Please select a slot'
-    }
-    else{
-      this.showErrorMsg = false
-      this.errorMsg = ''
-      this.parkingService.addCar(vehicleNo, color, slotNo)
-      this.newCarAdded.emit(true)
-    }
-  } 
+
+    this.parkingService.addCar(vehicleNo, color, slotNo)
+    this.newCarAdded.emit(true)
+  }
+  
 
 }

@@ -22,13 +22,17 @@ export class LandingPageComponent implements OnInit {
     let totalSlots = form.value.noOfSlots
     let occupiedSlots = form.value.noOfCars
 
-    if(totalSlots < occupiedSlots){
+    if(totalSlots == 0){
       this.showErrorMsg = true
-      this.errorMsg = 'Error: Available slots are less than parked cars'
+      this.errorMsg = 'Error: Please provide atleast 1 slot'
     }
     else if(totalSlots < 0 || occupiedSlots < 0){
       this.showErrorMsg = true
       this.errorMsg = 'Error: Invalid input, please try again'
+    }
+    else if(totalSlots < occupiedSlots){
+      this.showErrorMsg = true
+      this.errorMsg = 'Error: Available slots are less than parked cars'
     }
     else{
       this.parkingService.createParkingLot(totalSlots, occupiedSlots)

@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddCarComponent } from './add-car/add-car.component';
 import { ParkingHistoryComponent } from './parking-history/parking-history.component';
 import { GuardService } from './guard.service';
+import { VehicleNoValidatorDirective } from './vehicle-no-validator.directive';
 
 const appRoutes = [
   {path: '', redirectTo: 'create-parking-lot', pathMatch: 'full'},
@@ -25,7 +26,8 @@ const appRoutes = [
     ParkingDetailsComponent,
     HeaderComponent,
     AddCarComponent,
-    ParkingHistoryComponent
+    ParkingHistoryComponent,
+    VehicleNoValidatorDirective
   ],
   imports: [
     BrowserModule,

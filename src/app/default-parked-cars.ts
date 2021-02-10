@@ -1,26 +1,26 @@
 export const defaultParkedCars = [
     {
-        vehicleNo: 'KA-XY-1234',
+        vehicleNo: 'KA23XY1234',
         color: 'Red',
         inTime: new Date()
       },
       {
-        vehicleNo: 'KA-XY-4312',
+        vehicleNo: 'KA12XY4312',
         color: 'Yellow',
         inTime: new Date()
       },
       {
-        vehicleNo: 'KA-XY-5634',
+        vehicleNo: 'KA22XY5634',
         color: 'Blue',
         inTime: new Date()
       },
       {
-        vehicleNo: 'KA-XY-1294',
+        vehicleNo: 'KA24XY1294',
         color: 'Red',
         inTime: new Date()
       },
       {
-        vehicleNo: 'KA-XY-1034',
+        vehicleNo: 'KA32XY1034',
         color: 'Purple',
         inTime: new Date()
       }

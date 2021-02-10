@@ -1,8 +1,41 @@
 <div id="main-container" (click)="$event.stopPropagation()">
     <p id="header-text">Park a new car</p>
     <div id="seperator"></div>
-    <p *ngIf="showErrorMsg" class="error-msg" [innerHTML]="errorMsg"></p>
-    <p *ngIf="availableSlots.length == 0" class="error-msg">No slots available, please try after some time.</p>
+    <div *ngIf="
+        (vehicleNo.errors && vehicleNo.touched) || 
+        (slotNo.value === 'default' && slotNo.touched) ||
+        (color.value === 'default' && color.touched) ||
+        (availableSlots.length == 0)" 
+        id="error-msgs-container">
+        <ul>
+            <li class="error-msg" 
+                *ngIf="vehicleNo.errors && 
+                    vehicleNo.errors.invalidVehicleNo && 
+                    vehicleNo.touched"
+                >{{vehicleNo.errors.invalidVehicleNo}}
+            </li>
+            <li class="error-msg" 
+                *ngIf="vehicleNo.errors && 
+                    vehicleNo.errors.carParked && 
+                    vehicleNo.touched"
+                >{{vehicleNo.errors.carParked}}
+            </li>
+            <li class="error-msg" 
+                *ngIf="color.value === 'default' && 
+                    color.touched"
+                >Please select a color
+            </li>
+            <li class="error-msg" 
+                *ngIf="slotNo.value === 'default' && 
+                    slotNo.touched && availableSlots.length != 0"
+                >Please select a slot
+            </li>
+            <li class="error-msg" 
+                *ngIf="availableSlots.length == 0"
+                >No slots available, please try after some time.
+            </li>
+        </ul>
+    </div>
     <form (ngSubmit)="parkCar(f)" #f="ngForm">
         <input 
             class="ip-field"
@@ -10,27 +43,45 @@
             name="vehicleNo"
             placeholder="Vehicle Reg No."
             ngModel
-            required
+            appVehicleNoValidator
+            #vehicleNo="ngModel"
         >
-        <input 
+        <select
+            class="ip-field"
+            name="color"
+            [ngModel]="selectedColor"
+            style="width: 100%; cursor: pointer;"
+            #color="ngModel"
+        >
+            <option *ngFor="let color of availableColors" [value]="color">{{color}}</option>
+            <option value="default" selected disabled hidden>Choose a color</option>
+        </select>
+        <!-- <input 
             class="ip-field"
             type="text"
             name="color"
             placeholder="Color"
             ngModel
             required
-        >
+        > -->
         <select
             class="ip-field"
             name="slotNo"
-            class="ip-field"
             [ngModel]="selectedSlot"
             style="width: 100%; cursor: pointer;"
-            required
+            #slotNo="ngModel"
         >
             <option *ngFor="let slot of availableSlots" [value]="slot">{{slot}}</option>
             <option value="default" selected disabled hidden>Choose a slot</option>
         </select>
-        <button type="submit" [disabled]="!f.valid || availableSlots.length == 0">Park car</button>
+        <button type="submit" 
+            [disabled]="!f.valid || 
+                availableSlots.length == 0 || 
+                color.value === 'default' ||
+                slotNo.value === 'default'"
+            >
+            Park car
+        </button>
+        <!-- <button type="submit">Park car</button> -->
     </form>
 </div>

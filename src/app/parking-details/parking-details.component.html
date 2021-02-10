@@ -26,10 +26,10 @@
     <div id="seperator"></div>
     <div id="parking-details-filters">
         <form (ngSubmit)="searchCars(f)" #f="ngForm">
-            <input class="ip-field" type="text" name="regNo" placeholder="Vehicle Reg. No" ngModel>
+            <input class="ip-field" type="text" name="regNo" placeholder="Vehicle Reg. No" #regNo="ngModel" ngModel>
             <select name="color" id="color-select" class="ip-field" [ngModel]="selectedColor">
+                <option value="default" selected>Choose color</option>
                 <option *ngFor="let color of listCarColorsInParking" [value]="color">{{color}}</option>
-                <option value="default" selected disabled hidden>Choose color</option>
             </select>
             <button id="search-btn" type="submit">Search</button> 
             <button id="reset-btn" type="button" (click)="resetFilters(f)">Reset</button>

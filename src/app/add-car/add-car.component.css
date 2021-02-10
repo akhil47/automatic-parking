@@ -16,7 +16,7 @@
 }
 .ip-field{
     padding: 8px;
-    width: 256px;
+    width: 320px;
     margin-bottom: 8px;
     display: block;
 }
@@ -36,12 +36,20 @@ button:disabled{
 input.ng-invalid.ng-touched{
     border: 1px solid red;
 }
-.error-msg{
+#error-msgs-container{
     background-color: rgba(241, 148, 138, 0.3);
     border-radius: 4px;
-    text-align: center;
+    text-align: justify;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+.error-msg{
     color: red;
     font-size: 12px;
     font-weight: 600;
-    padding: 8px;
+    margin: 0px;
+}
+ul{
+    margin: 0px;
+    padding-left: 20px;
 }

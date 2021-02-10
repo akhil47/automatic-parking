@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ParkingService } from '../parking.service';
 
@@ -8,9 +8,25 @@ import { ParkingService } from '../parking.service';
   templateUrl: './parking-details.component.html',
   styleUrls: ['./parking-details.component.css']
 })
-export class ParkingDetailsComponent implements OnInit {
+export class ParkingDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('f') filtersForm: NgForm
+
+  private vehicleNo;
+  @ViewChild('regNo') set initVehicleNo(regNo){
+    if(regNo){
+      this.vehicleNo = regNo
+      this.vehicleNoSubscription = this.vehicleNo.valueChanges.subscribe(
+        searchValue => {
+          this.filteredCarsParked = this.carsParked.filter(
+            (car, index) => {
+                return car.vehicleNo.match(new RegExp(searchValue, 'i'))
+            }
+          )
+        }
+      )
+    }
+  }
 
   totalSlots = 0
   availableSlots = 0
@@ -20,6 +36,7 @@ export class ParkingDetailsComponent implements OnInit {
   listCarColorsInParking = []
 
   parkingLotSubscription: Subscription
+  vehicleNoSubscription: Subscription
 
   showParkCarPopup = false
   showParkingHistory = false
@@ -42,6 +59,13 @@ export class ParkingDetailsComponent implements OnInit {
       }
     )
   }
+  ngOnDestroy(){
+    if(this.parkingLotSubscription) this.parkingLotSubscription.unsubscribe()
+    if(this.vehicleNoSubscription) this.vehicleNoSubscription.unsubscribe()
+  }
+  ngAfterViewInit(){
+    
+  }
   extractCarColors(){
     this.listCarColorsInParking = []
     let colors = {}
@@ -59,7 +83,7 @@ export class ParkingDetailsComponent implements OnInit {
           return (car.color == color && car.vehicleNo.match(vehicleNo))
         }
         else{
-          return car.vehicleNo.match(vehicleNo)
+          return car.vehicleNo.match(new RegExp(vehicleNo, 'i'))
         }
       }
     )
