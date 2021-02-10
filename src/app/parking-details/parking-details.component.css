@@ -52,6 +52,7 @@ button{
     margin-bottom: 16px;
     background-color: grey;
 }
+
 /* Parking lot filters related CSS */
 #parking-details-filters{
     /* background-color: green; */
@@ -92,4 +93,17 @@ th{
 #remove-btn{
     background-color: #F1C40F;
     color: black;
+}
+
+/* Popup related CSS */
+.popup{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(242, 243, 244, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

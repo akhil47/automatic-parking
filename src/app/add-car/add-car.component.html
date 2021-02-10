@@ -1,0 +1,32 @@
+<div id="main-container" (click)="$event.stopPropagation()">
+    <p id="header-text">Park a new car</p>
+    <div id="seperator"></div>
+    <form (ngSubmit)="parkCar(f)" #f="ngForm">
+        <input 
+            class="ip-field"
+            type="text"
+            name="vehicleNo"
+            placeholder="Vehicle Reg No."
+            ngModel
+            required
+        >
+        <input 
+            class="ip-field"
+            type="text"
+            name="color"
+            placeholder="Color"
+            ngModel
+        >
+        <select
+            class="ip-field"
+            name="slotNo"
+            class="ip-field"
+            [ngModel]="selectedSlot"
+            style="width: 100%; cursor: pointer;"
+        >
+            <option *ngFor="let slot of availableSlots" [value]="slot">{{slot}}</option>
+            <option value="default" selected disabled hidden>Choose a slot</option>
+        </select>
+        <button type="submit">Park car</button>
+    </form>
+</div>

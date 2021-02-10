@@ -1,21 +1,24 @@
+<div *ngIf="showParkCarPopup" (click)="closePopup()" class="popup">
+    <app-add-car (newCarAdded)="closePopup()"></app-add-car>
+</div>
 <div id="main-container">
     <div id="stats-container">
         <table style="width: 100%;">
             <tr>
                 <td class="stats-cell-1">Total parking slots</td>
                 <td class="stats-cell-2">:</td>
-                <td class="stats-cell-3">{{10}}</td>
+                <td class="stats-cell-3">{{totalSlots}}</td>
             </tr>
             <tr>
                 <td class="stats-cell-1">Available parking slots</td>
                 <td class="stats-cell-2">:</td>
-                <td class="stats-cell-3">{{5}}</td>
+                <td class="stats-cell-3">{{availableSlots}}</td>
             </tr>
         </table>
     </div>
     <div id="btns-container">
         <button id="query-btn">Query Data</button> 
-        <button id="park-btn">Park a car</button>
+        <button (click)="showParkCar()" id="park-btn">Park a car</button>
     </div>
     <div id="seperator"></div>
     <div id="parking-details-filters">
@@ -46,8 +49,8 @@
                 <td class="car-details-cell">{{car.vehicleNo}}</td>
                 <td class="car-details-cell">{{car.color}}</td>
                 <td class="car-details-cell">{{car.slotNo}}</td>
-                <td class="car-details-cell">{{car.date | date: 'dd MMM yyyy, hh:mm a'}}</td>
-                <td class="car-details-cell"><button id="remove-btn">Remove</button></td>
+                <td class="car-details-cell">{{car.inTime | date: 'dd MMM yyyy, hh:mm a'}}</td>
+                <td class="car-details-cell"><button id="remove-btn" (click)="removeCar(i)">Remove</button></td>
             </tr>
         </table>
     </div>

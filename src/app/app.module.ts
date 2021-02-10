@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddCarComponent } from './add-car/add-car.component';
 
 const appRoutes = [
   {path: '', redirectTo: 'create-parking-lot', pathMatch: 'full'},
@@ -20,7 +21,8 @@ const appRoutes = [
     AppComponent,
     LandingPageComponent,
     ParkingDetailsComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddCarComponent
   ],
   imports: [
     BrowserModule,
