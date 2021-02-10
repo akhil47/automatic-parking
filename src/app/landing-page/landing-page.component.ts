@@ -15,6 +15,7 @@ export class LandingPageComponent implements OnInit {
   constructor(private router: Router, private parkingService: ParkingService) { }
 
   ngOnInit(): void {
+    this.parkingService.removeParkingLot()
   }
 
   createNewParkingLot(form: NgForm){

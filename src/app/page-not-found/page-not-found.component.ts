@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ParkingService } from '../parking.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -8,9 +9,10 @@ import { Router } from '@angular/router';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private parkingService: ParkingService) { }
 
   ngOnInit(): void {
+    this.parkingService.removeParkingLot()
   }
   navigateHome(){
     this.router.navigate(['/'])

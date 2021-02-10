@@ -58,6 +58,9 @@ export class ParkingService {
   getParkingHistory(){
     return [...this.parkingHistory]
   }
+  removeParkingLot(){
+    this.parkingLotCreated = false
+  }
   addCar(vehicleNo: string, color: string, slotNo){
     let car = {
       vehicleNo: vehicleNo,
