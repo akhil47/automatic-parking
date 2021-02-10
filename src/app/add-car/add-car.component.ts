@@ -24,7 +24,6 @@ export class AddCarComponent implements OnInit {
     let vehicleNo = form.value.vehicleNo
     let color = form.value.color
     let slotNo = form.value.slotNo
-    // Add car using service
     this.parkingService.addCar(vehicleNo, color, slotNo)
     this.newCarAdded.emit(true) 
   } 
