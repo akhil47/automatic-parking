@@ -4,9 +4,9 @@
             <p id="header-text">Create a new parking lot</p>
             <div id="seperator"></div>
             <label>No. of parking slots</label>
-            <input type="number" name="noOfSlots" #slots="ngModel" required>
+            <input type="number" name="noOfSlots" ngModel required>
             <label>No. of cars parked</label>
-            <input type="number" name="noOfCars" #cars="ngModel" required>
+            <input type="number" name="noOfCars" ngModel required>
             <button [disabled]="!f.valid" id="submit-btn" type="submit">Create</button>
         </form>
     </div>

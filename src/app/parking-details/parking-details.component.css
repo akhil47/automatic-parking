@@ -1,0 +1,95 @@
+#main-container{
+    margin-top: 8px;
+    padding: 16px;
+}
+/* Stats container CSS */
+#stats-container{
+    width: 50%;
+    display: inline-block;
+}
+td{
+    font-size: 13px;
+}
+.stats-cell-1{
+    width: 40%;
+}
+.stats-cell-2{
+    width: 5%;
+}
+.stats-cell-3{
+    width: 55%;
+}
+/* Query data & park car related CSS */
+#btns-container{
+    vertical-align: top;
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+}
+button{
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+/* button:disabled{
+    cursor: not-allowed;
+    background-color: rgba(40, 180, 99, 0.5);
+} */
+#query-btn{
+    background-color: #28B463;
+    color: white;
+    margin-right: 8px;
+}
+#park-btn{
+    background-color: #E74C3C;
+    color: white;
+}
+#seperator{
+    height: 1px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    background-color: grey;
+}
+/* Parking lot filters related CSS */
+#parking-details-filters{
+    /* background-color: green; */
+    text-align: right;
+}
+.ip-field{
+    padding: 8px;
+    /* border-radius: 4px; */
+    width: 150px;
+    margin-right: 8px;
+}
+#search-btn{
+    background-color: #3498DB;
+    color: white;
+    margin-right: 8px;
+}
+#reset-btn{
+    background-color: #E74C3C;
+    color: white;
+}
+
+/* Parking lot details related CSS */
+#parking-details-container{
+    margin-top: 8px;
+}
+th{
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 8px;
+    cursor: pointer;
+}
+.car-details-cell{
+    text-align: center;
+    padding: 8px;
+}
+#remove-btn{
+    background-color: #F1C40F;
+    color: black;
+}

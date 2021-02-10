@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ParkingService } from '../parking.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,13 +10,17 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private parkingService: ParkingService) { }
 
   ngOnInit(): void {
   }
 
   createNewParkingLot(form: NgForm){
-    console.log(form.value)
+    let totalSlots = form.value.noOfSlots
+    let occupiedSlots = form.value.noOfCars
+
+    this.parkingService.createParkingLot(totalSlots, occupiedSlots)
+
     this.router.navigate(['/parking-lot'])
   }
 }
