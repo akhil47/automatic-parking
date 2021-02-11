@@ -2,7 +2,8 @@
     padding: 16px;
     background-color: white;
     border-radius: 4px;
-    width: 320px;
+    width: 304px;
+    box-sizing: border-box;
     cursor: default;
 }
 #header-text{
@@ -35,4 +36,10 @@ td{
     font-size: 14px;
     font-weight: 600;
     margin: 0px;
+}
+@media screen and (min-width: 768px) {
+    #main-container{
+        width: 320px;
+        box-sizing: content-box;
+    }
 }

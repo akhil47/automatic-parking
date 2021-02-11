@@ -2,6 +2,8 @@
     padding: 16px;
     background-color: white;
     border-radius: 4px;
+    width: 304px;
+    box-sizing: border-box;
 }
 #header-text{
     font-size: 16px;
@@ -16,8 +18,9 @@
 }
 .ip-field{
     padding: 8px;
-    width: 320px;
     margin-bottom: 8px;
+    box-sizing: border-box;
+    width: 100%;
     display: block;
 }
 button{
@@ -45,11 +48,23 @@ input.ng-invalid.ng-touched{
 }
 .error-msg{
     color: red;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     margin: 0px;
 }
 ul{
     margin: 0px;
     padding-left: 20px;
+}
+@media screen and (min-width: 768px) {
+    #main-container{
+        padding: 16px;
+        background-color: white;
+        border-radius: 4px;
+        width: 320px;
+        box-sizing: content-box;
+    }
+    .error-msg{
+        font-size: 12px;
+    }
 }

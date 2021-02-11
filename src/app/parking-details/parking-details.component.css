@@ -3,28 +3,31 @@
     padding: 16px;
 }
 /* Stats container CSS */
-#stats-container{
+/* #stats-container{
     width: 50%;
     display: inline-block;
-}
+} */
 td{
     font-size: 13px;
 }
 .stats-cell-1{
-    width: 40%;
+    width: 50%;
 }
 .stats-cell-2{
     width: 5%;
 }
 .stats-cell-3{
-    width: 55%;
+    width: 45%;
+}
+@media screen and (min-width: 768px) {
+    #stats-container{
+        width: 50%;
+        display: inline-block;
+    }
 }
 /* Query data & park car related CSS */
 #btns-container{
-    vertical-align: top;
-    width: 50%;
-    display: inline-block;
-    text-align: right;
+    margin-top: 8px;
 }
 button{
     cursor: pointer;
@@ -56,17 +59,27 @@ button{
     margin-bottom: 16px;
     background-color: grey;
 }
+@media screen and (min-width: 768px) {
+    #btns-container{
+        vertical-align: top;
+        width: 50%;
+        display: inline-block;
+        text-align: right;
+        margin: 0px;
+    }
+}
 
 /* Parking lot filters related CSS */
 #parking-details-filters{
     /* background-color: green; */
-    text-align: right;
+    text-align: left;
+    display: block;
 }
 .ip-field{
     padding: 8px;
-    /* border-radius: 4px; */
-    width: 150px;
-    margin-right: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 8px;
 }
 #search-btn{
     background-color: #3498DB;
@@ -76,6 +89,18 @@ button{
 #reset-btn{
     background-color: #E74C3C;
     color: white;
+}
+@media screen and (min-width: 768px) {
+    #parking-details-filters{
+        /* background-color: green; */
+        text-align: right;
+        display: block;
+    }
+    .ip-field{
+        width: 150px;
+        margin-right: 8px;
+        margin-bottom: 0px;
+    }
 }
 
 /* Parking lot details related CSS */
